@@ -1,0 +1,19 @@
+# Materiale del docente (protetto da copyright, non va pubblicato)
+documentazione_prof/
+
+# Sorgenti e strumenti per preparare la consegna (non pubblicati)
+materiale_consegna/
+
+# Build .NET
+bin/
+obj/
+out/
+
+# File generati a ogni esecuzione
+logs/
+conto.txt
+conto.txt.tmp
+registro_operazioni.txt
+
+# macOS
+.DS_Store
