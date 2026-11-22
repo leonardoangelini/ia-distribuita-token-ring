@@ -17,3 +17,6 @@ registro_operazioni.txt
 
 # macOS
 .DS_Store
+
+# Registrazione grezza della narrazione (usata da materiale_consegna/monta_video.py)
+video/*.m4a
