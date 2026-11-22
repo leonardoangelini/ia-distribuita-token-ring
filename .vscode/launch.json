@@ -1,0 +1,64 @@
+{
+    // Debug dei nodi ATM con l'estensione C# (ms-dotnettools.csharp).
+    //
+    // - "Anello completo (4 nodi)": compila una volta e avvia i 4 nodi in debug,
+    //   ognuno nel proprio terminale integrato. Si possono mettere breakpoint in
+    //   NodoAtm.cs (es. in GestisciToken o SezioneCritica) e seguire il token.
+    // - "ATM1".."ATM4": avviano un singolo nodo (compilare prima con Cmd/Ctrl+Shift+B).
+    //   Utile per eseguire in debug un solo nodo e gli altri da terminale.
+    //
+    // Le transazioni aggiuntive (es. "deposito 50") si digitano nel terminale
+    // integrato del nodo. I file conto.txt, registro_operazioni.txt e logs/
+    // vengono creati nella cartella del progetto.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ATM1 (initial holder)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/TokenRingAtm/bin/Debug/net10.0/TokenRingAtm.dll",
+            "args": ["ATM1", "--porta", "5001", "--successore", "ATM2:5002", "--initial-holder"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "ATM2",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/TokenRingAtm/bin/Debug/net10.0/TokenRingAtm.dll",
+            "args": ["ATM2", "--porta", "5002", "--successore", "ATM3:5003"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "ATM3",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/TokenRingAtm/bin/Debug/net10.0/TokenRingAtm.dll",
+            "args": ["ATM3", "--porta", "5003", "--successore", "ATM4:5004"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "ATM4",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/TokenRingAtm/bin/Debug/net10.0/TokenRingAtm.dll",
+            "args": ["ATM4", "--porta", "5004", "--successore", "ATM1:5001"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Anello completo (4 nodi)",
+            "configurations": ["ATM2", "ATM3", "ATM4", "ATM1 (initial holder)"],
+            "preLaunchTask": "build",
+            "stopAll": true
+        }
+    ]
+}

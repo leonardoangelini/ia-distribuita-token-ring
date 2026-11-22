@@ -1,0 +1,36 @@
+{
+    // Task di VS Code per compilare e testare la soluzione.
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "detail": "Compila la soluzione in Debug",
+            "type": "process",
+            "command": "dotnet",
+            "args": ["build", "${workspaceFolder}/TokenRingAtm.sln", "-c", "Debug", "--nologo"],
+            "problemMatcher": "$msCompile",
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "reveal": "silent", "clear": true }
+        },
+        {
+            "label": "test",
+            "detail": "Esegue i test di integrazione (avvia i 4 nodi su porte dedicate)",
+            "type": "process",
+            "command": "dotnet",
+            "args": ["test", "${workspaceFolder}/TokenRingAtm.sln", "--nologo"],
+            "problemMatcher": "$msCompile",
+            "group": { "kind": "test", "isDefault": true }
+        },
+        {
+            "label": "pulisci dati",
+            "detail": "Elimina conto.txt, registro_operazioni.txt e logs/ generati dalle esecuzioni",
+            "type": "shell",
+            "command": "rm -rf conto.txt conto.txt.tmp registro_operazioni.txt logs",
+            "windows": {
+                "command": "Remove-Item -Recurse -Force -ErrorAction SilentlyContinue conto.txt, conto.txt.tmp, registro_operazioni.txt, logs"
+            },
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": []
+        }
+    ]
+}
